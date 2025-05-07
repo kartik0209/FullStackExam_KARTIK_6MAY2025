@@ -1,16 +1,19 @@
 // components/AddToCartButton.tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './AddToCartButton.module.scss';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./AddToCartButton.module.scss";
 
 interface AddToCartButtonProps {
   productId: string;
   inStock: boolean;
 }
 
-export default function AddToCartButton({ productId, inStock }: AddToCartButtonProps) {
+export default function AddToCartButton({
+  productId,
+  inStock,
+}: AddToCartButtonProps) {
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
   const router = useRouter();
@@ -20,22 +23,24 @@ export default function AddToCartButton({ productId, inStock }: AddToCartButtonP
     setIsAdding(true);
 
     try {
-      const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
-        },
-        body: JSON.stringify({ productId, quantity }),
-      });
+      const token = localStorage.getItem("token");
+      const res = await fetch(
+        "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/cart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+          body: JSON.stringify({ productId, quantity }),
+        }
+      );
       const body = await res.json();
-      if (!res.ok) throw new Error(body.message || 'Add to cart failed');
-      alert('Added to cart!');
-    
+      if (!res.ok) throw new Error(body.message || "Add to cart failed");
+      alert("Added to cart!");
     } catch (err: any) {
       console.error(err);
-      alert(err.message || 'Failed to add to cart');
+      alert(err.message || "Failed to add to cart");
     } finally {
       setIsAdding(false);
     }
@@ -43,7 +48,9 @@ export default function AddToCartButton({ productId, inStock }: AddToCartButtonP
 
   return (
     <div className={styles.wrapper}>
-      <label htmlFor="qty" className={styles.label}>Qty:</label>
+      <label htmlFor="qty" className={styles.label}>
+        Qty:
+      </label>
       <select
         id="qty"
         value={quantity}
@@ -52,7 +59,9 @@ export default function AddToCartButton({ productId, inStock }: AddToCartButtonP
         className={styles.select}
       >
         {[...Array(10)].map((_, i) => (
-          <option key={i+1} value={i+1}>{i+1}</option>
+          <option key={i + 1} value={i + 1}>
+            {i + 1}
+          </option>
         ))}
       </select>
 
@@ -61,7 +70,7 @@ export default function AddToCartButton({ productId, inStock }: AddToCartButtonP
         disabled={!inStock || isAdding}
         className={styles.button}
       >
-        {isAdding ? 'Adding…' : inStock ? 'Add to Cart' : 'Out of Stock'}
+        {isAdding ? "Adding…" : inStock ? "Add to Cart" : "Out of Stock"}
       </button>
     </div>
   );

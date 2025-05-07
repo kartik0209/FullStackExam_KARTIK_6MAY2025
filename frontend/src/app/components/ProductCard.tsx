@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Product } from '@/types'; 
-import '../style/ProductCard.scss';
-
+import React, { useState } from "react";
+import { Product } from "@/types";
+import "../style/ProductCard.scss";
 
 interface ProductCardProps {
   product: Product;
@@ -11,37 +10,37 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  
   const addToCart = async (productId: string) => {
     setIsLoading(true);
-    setErrorMessage(''); 
+    setErrorMessage("");
 
     try {
-      const response = await fetch('http://localhost:5000/api/cart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId,
-          quantity: 1, 
-        }),
-      });
+      const response = await fetch(
+        "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/cart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId,
+            quantity: 1,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-     
-        console.log('Product added to cart', data);
+        console.log("Product added to cart", data);
       } else {
-       
-        setErrorMessage(data.message || 'Failed to add product to cart');
+        setErrorMessage(data.message || "Failed to add product to cart");
       }
     } catch (error) {
-      setErrorMessage('Something went wrong. Please try again later.');
-      console.error('Error adding to cart:', error);
+      setErrorMessage("Something went wrong. Please try again later.");
+      console.error("Error adding to cart:", error);
     } finally {
       setIsLoading(false);
     }
@@ -51,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="product-card">
       <div className="image-wrapper">
         <img
-          src={product.imageUrl || '/placeholder.png'}
+          src={product.imageUrl || "/placeholder.png"}
           alt={product.name}
           className="product-image"
         />
@@ -63,18 +62,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <p className="product-category">{product.category}</p>
         {product.stock !== undefined && (
           <p
-            className={`product-stock ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}
+            className={`product-stock ${
+              product.stock > 0 ? "in-stock" : "out-of-stock"
+            }`}
           >
-            {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+            {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
           </p>
         )}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button
           className="add-to-cart-btn"
-          onClick={() => addToCart(product.id || product._id || '')}
+          onClick={() => addToCart(product.id || product._id || "")}
           disabled={product.stock === 0 || isLoading}
         >
-          {isLoading ? 'Adding...' : product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {isLoading
+            ? "Adding..."
+            : product.stock === 0
+            ? "Out of Stock"
+            : "Add to Cart"}
         </button>
       </div>
     </div>

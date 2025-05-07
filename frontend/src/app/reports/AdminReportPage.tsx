@@ -1,10 +1,14 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminReportPage.scss";
-import { RevenueData, TopSpender, ProductSale, CategorySale } from "../../types";
+import {
+  RevenueData,
+  TopSpender,
+  ProductSale,
+  CategorySale,
+} from "../../types";
 
 const AdminReportPage: React.FC = () => {
   const [revenueData, setRevenueData] = useState<RevenueData[]>([]);
@@ -28,17 +32,25 @@ const AdminReportPage: React.FC = () => {
         }
 
         const headers = { Authorization: `Bearer ${token}` };
-        const [
-          revenueRes,
-          spenderRes,
-          productRes,
-          categoryRes,
-        ] = await Promise.all([
-          axios.get("http://localhost:5000/api/reports/revenue", { headers }),
-          axios.get("http://localhost:5000/api/reports/top-spenders", { headers }),
-          axios.get("http://localhost:5000/api/reports/product-sales", { headers }),
-          axios.get("http://localhost:5000/api/reports/category-sales", { headers }),
-        ]);
+        const [revenueRes, spenderRes, productRes, categoryRes] =
+          await Promise.all([
+            axios.get(
+              "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/reports/revenue",
+              { headers }
+            ),
+            axios.get(
+              "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/reports/top-spenders",
+              { headers }
+            ),
+            axios.get(
+              "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/reports/product-sales",
+              { headers }
+            ),
+            axios.get(
+              "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/reports/category-sales",
+              { headers }
+            ),
+          ]);
 
         setRevenueData(revenueRes.data.data);
         setTopSpenders(spenderRes.data.data);

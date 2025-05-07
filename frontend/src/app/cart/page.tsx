@@ -8,7 +8,8 @@ import styles from "./CartPage.module.scss";
 import axios from "axios";
 import { CartItemType, Product } from "@/types";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL =
+  "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api";
 const getToken = () => {
   return typeof window !== "undefined" ? localStorage.getItem("token") : null;
 };

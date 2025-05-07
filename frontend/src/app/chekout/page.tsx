@@ -38,14 +38,17 @@ export default function CheckoutPage() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/cart", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          // Add authorization header if required
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const response = await fetch(
+        "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/cart",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            // Add authorization header if required
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -75,31 +78,34 @@ export default function CheckoutPage() {
 
     try {
       // Call API to create an order
-      const response = await fetch("http://localhost:5000/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Add authorization header if required
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          shippingDetails: {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            address: formData.address,
-            city: formData.city,
-            zipCode: formData.zipCode,
-            country: formData.country,
+      const response = await fetch(
+        "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/orders",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Add authorization header if required
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-          paymentDetails: {
-            cardNumber: formData.cardNumber,
-            cardName: formData.cardName,
-            expiryDate: formData.expiryDate,
-            cvv: formData.cvv,
-          },
-        }),
-      });
+          body: JSON.stringify({
+            shippingDetails: {
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              email: formData.email,
+              address: formData.address,
+              city: formData.city,
+              zipCode: formData.zipCode,
+              country: formData.country,
+            },
+            paymentDetails: {
+              cardNumber: formData.cardNumber,
+              cardName: formData.cardName,
+              expiryDate: formData.expiryDate,
+              cvv: formData.cvv,
+            },
+          }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();

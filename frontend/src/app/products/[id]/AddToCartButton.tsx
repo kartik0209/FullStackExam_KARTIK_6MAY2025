@@ -22,14 +22,17 @@ export default function AddToCartButton({
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ productId, quantity }),
-      });
+      const response = await fetch(
+        "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/cart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ productId, quantity }),
+        }
+      );
 
       const data = await response.json();
 

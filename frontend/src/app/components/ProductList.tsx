@@ -1,40 +1,45 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';           // ← import Link
-import { Product } from '@/types';
-import ProductCard from './ProductCard';
-import Pagination from './Pagination';
-import './ProductList.scss';
+import { useState } from "react";
+import Link from "next/link"; // ← import Link
+import { Product } from "@/types";
+import ProductCard from "./ProductCard";
+import Pagination from "./Pagination";
+import "./ProductList.scss";
 
 interface ProductListProps {
   initialProducts: Product[];
   totalPages: number;
 }
 
-export default function ProductList({ initialProducts, totalPages: initialTotalPages }: ProductListProps) {
+export default function ProductList({
+  initialProducts,
+  totalPages: initialTotalPages,
+}: ProductListProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [category, setCategory] = useState("");
   const [totalPages, setTotalPages] = useState(initialTotalPages);
 
   const fetchProducts = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5000/api/products?search=${searchTerm}&category=${category}&page=${currentPage}`);
+      const response = await fetch(
+        `https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/products?search=${searchTerm}&category=${category}&page=${currentPage}`
+      );
       const data = await response.json();
       if (response.ok) {
         setProducts(data.products);
         setTotalPages(data.totalPages);
       } else {
-        setError('Failed to fetch products');
+        setError("Failed to fetch products");
       }
     } catch {
-      setError('An error occurred while fetching products');
+      setError("An error occurred while fetching products");
     } finally {
       setLoading(false);
     }
@@ -68,7 +73,9 @@ export default function ProductList({ initialProducts, totalPages: initialTotalP
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
-          <button type="submit" className="search-button">Search</button>
+          <button type="submit" className="search-button">
+            Search
+          </button>
         </form>
 
         <div className="category-select-wrapper">
@@ -100,7 +107,10 @@ export default function ProductList({ initialProducts, totalPages: initialTotalP
         <>
           <div className="products-grid">
             {products.map((product) => (
-              <Link key={product.id || product._id} href={`/products/${product.id || product._id}`}>
+              <Link
+                key={product.id || product._id}
+                href={`/products/${product.id || product._id}`}
+              >
                 {/* No <a> needed in App Router, but you can wrap in a div if you need styling */}
                 <ProductCard product={product} />
               </Link>

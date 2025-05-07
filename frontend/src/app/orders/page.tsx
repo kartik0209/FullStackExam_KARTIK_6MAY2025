@@ -19,12 +19,15 @@ export default function OrdersPage() {
       setError(null);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/orders/myorders", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token ? `Bearer ${token}` : "",
-          },
-        });
+        const res = await fetch(
+          "https://fullstackexam-kartik-chaudhary-6may2025.onrender.com/api/orders/myorders",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token ? `Bearer ${token}` : "",
+            },
+          }
+        );
         const body = await res.json();
         if (!res.ok) throw new Error(body.message || "Failed to load orders");
         setOrders(body.data);
