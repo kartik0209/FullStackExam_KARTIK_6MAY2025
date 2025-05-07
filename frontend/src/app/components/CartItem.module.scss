@@ -1,0 +1,66 @@
+.card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.details {
+  flex: 1;
+
+  .name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .price {
+    margin: 0.25rem 0;
+    color: #e60023;
+    font-weight: 600;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+
+    .label {
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .select {
+      padding: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: color 0.2s;
+  
+  &:hover {
+    color: #e60023;
+  }
+}

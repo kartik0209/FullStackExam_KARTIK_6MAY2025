@@ -1,0 +1,195 @@
+// Variables
+$font-family: 'Helvetica Neue', Arial, sans-serif;
+$font-color: #333;
+$bg-light: #f9fafb;
+$primary: #0070f3;
+$primary-dark: #005bb5;
+$card-bg: #ffffff;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+// Base Styles
+body {
+  margin: 0;
+  font-family: $font-family;
+  color: $font-color;
+  background-color: $bg-light;
+}
+
+a {
+  text-decoration: none;
+}
+
+// Layout
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+// Buttons
+.btn-primary {
+  display: inline-block;
+  background-color: $primary;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: $primary-dark;
+  }
+  &.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+.btn-secondary {
+  @extend .btn-primary;
+  background-color: #fff;
+  color: $primary;
+  border: 2px solid $primary;
+  &:hover {
+    background-color: $bg-light;
+  }
+}
+
+// Inputs
+.input-primary {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid darken($bg-light, 10%);
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+// Sections
+.hero-section {
+  position: relative;
+  height: 24rem;
+  background: url('/images/hero-bg.jpg') center/cover no-repeat;
+  margin-bottom: 3rem;
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .hero-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    p { font-size: 1.125rem; margin-bottom: 2rem; max-width: 40rem; }
+  }
+}
+
+.categories-section,
+.products-section,
+.testimonials-section,
+.newsletter-section {
+  margin-bottom: 3rem;
+}
+
+.categories-section h2,
+.products-section h2,
+.testimonials-section h2,
+.newsletter-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem,1fr));
+  gap: 1.5rem;
+}
+.category-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  .category-image {
+    position: relative;
+    height: 12rem;
+    img { object-fit: cover; }
+  }
+  .category-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.75rem;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  .link-secondary { color: $primary; &:hover { text-decoration: underline; } }
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem,1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  background-color: $card-bg;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px $shadow-color;
+  overflow: hidden;
+  .product-image {
+    height: 12rem;
+    background-color: lighten($bg-light, 5%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: darken($bg-light, 40%);
+  }
+  .product-info {
+    padding: 1rem;
+    h3 { font-size: 1.125rem; }
+    .product-category { font-size: 0.875rem; color: darken($bg-light, 40%); margin-top: 0.25rem; }
+    .product-footer {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .price { font-size: 1.125rem; font-weight: bold; }
+    }
+  }
+}
+
+.testimonials-grid,
+.newsletter-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background-color: $card-bg;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px $shadow-color;
+  p { font-style: italic; margin-bottom: 1rem; }
+  .testimonial-author { font-weight: 500; }
+}
+
+.newsletter-form {
+  grid-template-columns: 1fr auto;
+}
