@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Product } from '@/types'; 
-import './Product-card.scss';
+import '../style/ProductCard.scss';
 
 
 interface ProductCardProps {

@@ -17,7 +17,7 @@ export interface User {
   email: string;
 }
 export interface CartSummary {
-  totalAmount: ReactNode;
+  totalAmount: Number;
   subtotal: number;
   shipping: number;
   total: number;
@@ -30,8 +30,8 @@ export interface CartSummary {
 
 
 export interface CartItem {
-  name: ReactNode;
-  _id: ReactNode;
+  name: string;
+  _id: string;
   productId: string;
   quantity: number;
   product: Product;

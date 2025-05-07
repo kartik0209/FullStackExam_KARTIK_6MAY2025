@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import "./Chekout.scss";
+import "../style/Chekout.scss";
 import { CartSummary, CartItem } from "../../types";
 
 export default function CheckoutPage() {
@@ -355,7 +355,7 @@ export default function CheckoutPage() {
           <hr />
           <div className="subtotal">
             <span>Subtotal</span>
-            <span>₹{cartSummary.totalAmount}</span>
+            <span>₹{Number(cartSummary.totalAmount)}</span>
           </div>
           <div className="shipping">
             <span>Shipping</span>
@@ -365,7 +365,7 @@ export default function CheckoutPage() {
           </div>
           <div className="total">
             <span>Total</span>
-            <span>₹{cartSummary.totalAmount}</span>
+            <span>₹{Number(cartSummary.totalAmount)}</span>
           </div>
         </div>
       </div>
